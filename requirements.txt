@@ -1,0 +1,14 @@
+pyarrow==0.15.*
+tqdm
+fastai
+click
+wandb
+pytest
+albumentations
+twilio
+boto3
+botocore
+kaggle
+torch
+torchvision
+matplotlib
