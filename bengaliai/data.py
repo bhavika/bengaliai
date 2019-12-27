@@ -1,3 +1,4 @@
+from fastai import train
 from torch.utils.data import Dataset, DataLoader
 import pandas as pd
 from bengaliai.config import HEIGHT, WIDTH, SIZE, stats, train_df_pth, TRAIN, TEST, batchsize, DATA_DIR
@@ -56,3 +57,9 @@ def create_train_images():
                 img = cv2.imencode('.png', img)[1]
                 if not cv2.imwrite(os.path.join(DATA_DIR, 'train', f"{name}.png"), img):
                     raise Exception(f"Could not write image {name}")
+
+
+def get_labels():
+    df = pd.read_csv(train_df_pth)
+    nunique = list(df.nunique())[1:-1]
+    return nunique

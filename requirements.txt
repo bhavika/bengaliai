@@ -13,3 +13,4 @@ torch
 torchvision
 matplotlib
 opencv-python
+scikit-learn
