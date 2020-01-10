@@ -64,15 +64,14 @@ def create_train_images():
     def write_img(item, ds_id):
         img, name = item[0], item[1]
         try:
-            cv2.imwrite(os.path.join(DATA_DIR, "train", f"{name}_{ds_id}.png"), img)
+            if not os.path.exists(os.path.join(DATA_DIR, "train", f"{name}_{ds_id}.png")):
+                cv2.imwrite(os.path.join(DATA_DIR, "train", f"{name}_{ds_id}.png"), img)
         except Exception as e:
             print(f"Could not save image {name} due to {e}")
 
-    def dataset_to_img(f, ds_id):
+    for ds_id, f in enumerate(TRAIN):
         ds = BengaliAIDataset(f)
         Parallel(n_jobs=6)(delayed(write_img)(item, ds_id) for _, item in tqdm.tqdm(enumerate(ds, 0)))
-
-    Parallel(n_jobs=3)(delayed(dataset_to_img)(f, i) for i, f in enumerate(TRAIN))
 
 
 def get_train():
